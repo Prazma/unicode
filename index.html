@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+	<head>
+		<title>文字からUNICODE</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no">
+		<style>
+			body {
+				margin: 0;
+				font-family: sans-serif;
+				font-weight: lighter;
+			}
+			.allWrap {
+				width: 90%;
+				max-width: 400px;
+				margin-right: auto;
+				margin-left: auto;
+			}
+			h3{
+				font-size: 25px;
+				display: inline-block;
+				font-weight: lighter;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="allWrap">
+			<h3>UNICODE表示してくれるやつ</h3>
+			<form action="javascript:getCharCode()">
+				<input onkeyup="getCharCode()" id="stringInput" placeholder="文字を入力">
+				<input type="submit" value="UNICODEを表示">
+			</form>
+			<div id="productwrapper" style="display: none;">
+				<strong>UNICODE: </strong><span id="product"></span>
+			</div>
+			<script>
+				function toUnicode(str) {
+					return str.split('').map(function (value, index, array) {
+						var temp = value.charCodeAt(0).toString(16).toUpperCase();
+						if (temp.length > 2) {
+							return  '<br>' + temp;
+						}
+						return value;
+					}).join('');
+				}
+				function getCharCode() {
+					var uni = toUnicode(document.getElementById("stringInput").value);
+					document.getElementById("productwrapper").style.display = "block";
+					document.getElementById("product").innerHTML = uni;
+				}
+			</script>
+		</div>
+	</body>
+</html>
